@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  cloud-cost-monitor:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: cloud-cost-monitor
+    ports:
+      - "8080:8080"
+    environment:
+      # AWS Configuration - provide via environment or .env file
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
+      # Application Configuration
+      - SPRING_PROFILES_ACTIVE=docker
+      # Mail Configuration (optional)
+      - MAIL_HOST=${MAIL_HOST:-smtp.gmail.com}
+      - MAIL_PORT=${MAIL_PORT:-587}
+      - MAIL_USERNAME=${MAIL_USERNAME:-}
+      - MAIL_PASSWORD=${MAIL_PASSWORD:-}
+      - ALERT_EMAIL=${ALERT_EMAIL:-admin@example.com}
+    volumes:
+      # Persist H2 database data
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+# Optional: Add separate volume for data persistence
+volumes:
+  cost-data:
+    driver: local
