@@ -25,7 +25,7 @@ A Spring Boot application for monitoring AWS cloud costs using the Cost Explorer
 ### 1. Clone and Build
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/Lalit-Rajpurohit/CloudCost.git
 cd cloud-cost-monitor
 
 # Build the project
