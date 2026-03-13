@@ -74,6 +74,45 @@ Navigate to `http://localhost:8080/h2-console`
 - Username: `sa`
 - Password: (empty)
 
+## Frontend Setup
+
+The project includes a React-based dashboard for visualizing AWS costs.
+
+### Prerequisites
+
+- **Node.js 16+** and npm
+
+### Install Dependencies
+
+```bash
+cd frontend
+npm install
+```
+
+### Run the Frontend
+
+```bash
+npm start
+```
+
+The frontend will start at `http://localhost:3000` and proxy API requests to the backend at `http://localhost:8080`.
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+This creates a production build in the `frontend/build` folder.
+
+### Frontend Features
+
+- **Cost Distribution**: Interactive donut chart showing cost breakdown by service
+- **Cost Comparison**: Horizontal bar chart comparing service costs
+- **Service List**: Detailed view of all AWS services with costs and percentages
+- **Date Selection**: Filter costs by year and month
+- **Real-time Updates**: Refresh button to fetch latest cost data
+
 ## AWS IAM Setup
 
 ### Required IAM Permissions
